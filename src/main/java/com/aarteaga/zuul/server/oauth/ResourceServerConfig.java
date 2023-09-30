@@ -1,6 +1,7 @@
 package com.aarteaga.zuul.server.oauth;
 
 import java.util.Arrays;
+import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -79,7 +80,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter tokenConverter = new JwtAccessTokenConverter();
-		tokenConverter.setSigningKey(jwtKey);
+		tokenConverter.setSigningKey(Base64.getEncoder().encodeToString(jwtKey.getBytes()));
 		return tokenConverter;
 	}
 
